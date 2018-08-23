@@ -45,6 +45,41 @@ class Jadwal extends Component {
     
   }
 
+  renderSchedules () {
+    const { selectedDay } = this.state
+    return (
+      <div className="schedules">
+      {
+        items.map(item => {
+          const daySchedules = item.schedules.filter(schedule => isSameDay(schedule.start_date, selectedDay))
+          const cells = []
+    
+          for (let i = 0; i <= 23; i++) {
+            const idxOfScheduleAtThisHour = daySchedules.findIndex(s => 
+              getHours(s.start_date) <= i && getHours(s.end_date) >= i
+            )
+            const isScheduleExistAtThisHour = idxOfScheduleAtThisHour > -1
+    
+            if (isScheduleExistAtThisHour) {
+              cells.push(1)
+            } else {
+              cells.push(0)
+            }
+          }
+
+          return (
+            <div className="row" key={`schedule-item-${item.name}`}>
+              <div className="col" style={{ flexGrow: 3 }}>{item.name}</div>
+              {
+                cells.map(c => <div className="col its-flex justify-center">{ c === 1 ? 'X' : 'O'}</div>)
+              }
+            </div>
+          )
+        })
+      }
+      </div>
+    )
+  }
 
   render() {
     return (
