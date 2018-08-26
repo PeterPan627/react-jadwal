@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import isSameDay from 'date-fns/is_same_day'
-import getHours from 'date-fns/get_hours'
 import format from 'date-fns/format'
 import addDays from 'date-fns/add_days';
 import diffInHours from 'date-fns/difference_in_hours'
@@ -81,9 +80,9 @@ class Jadwal extends Component {
               })
 
               return (
-                <div className="row activities-group align-items-center">
+                <div className="row activities-group align-items-center" key={`activity-${item.name}-${idx}`}>
                   {
-                    daySchedules.map(dsch => (
+                    daySchedules.map((dsch, idx) => (
                       <div className="activity"
                         style={{
                           left: `${dsch.distFromStartOfDay * 100}px`,
