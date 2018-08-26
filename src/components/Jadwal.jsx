@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import isSameDay from 'date-fns/is_same_day'
 import getHours from 'date-fns/get_hours'
 import format from 'date-fns/format'
@@ -22,6 +22,23 @@ class Jadwal extends Component {
     }))
   }
 
+  renderLegends () {
+    return (
+      <div className="legends">
+        <div className="row legends-title">
+          <div className="col its-flex justify-center">
+          { this.props.legendsTitle }
+          </div>
+        </div>
+        { 
+          this.props.items.map((item, idx) => (
+            <div className="row item" key={`legend-item-${idx}`}>{ item.name }</div>
+          ))
+        }
+      </div>
+    )
+  }
+
   renderHours () {
 
     const hoursRow = []
@@ -30,7 +47,7 @@ class Jadwal extends Component {
       hoursRow.push(i)
     }
     return (
-      <div className="jadwal-header">
+      <div className="schedules-header">
         <div className="hours row" >
         {
           hoursRow.map(hour => (
@@ -47,38 +64,49 @@ class Jadwal extends Component {
     const { selectedDay } = this.state
     const { items } = this.props
     return (
-      <div className="schedules">
-      {
-        items.map(item => {
-          const daySchedules = item.schedules.filter(schedule => isSameDay(schedule.start_date, selectedDay))
-          const cells = []
-    
-          for (let i = 0; i <= 23; i++) {
-            const idxOfScheduleAtThisHour = daySchedules.findIndex(s => 
-              getHours(s.start_date) <= i && getHours(s.end_date) >= i
-            )
-            const isScheduleExistAtThisHour = idxOfScheduleAtThisHour > -1
-    
-            if (isScheduleExistAtThisHour) {
-              cells.push(1)
-            } else {
-              cells.push(0)
-            }
-          }
-
-          return (
-            <div className="row" key={`schedule-item-${item.name}`}>
-              {
-                cells.map((c, idx) => (
-                  <div className="col time its-flex justify-center" key={`cell-${item.name}-${idx}`}>
-                    { c === 1 ? 'X' : 'O'}
-                  </div>
-                ))
+      <div className="schedules-content">
+        <div className="activities">
+          <p>Hahahaha</p>
+        </div>
+        {
+          items.map((item, idx) => {
+            const daySchedules = item.schedules.filter(schedule => isSameDay(schedule.start_date, selectedDay))
+            const cells = []
+      
+            for (let i = 0; i <= 23; i++) {
+              const idxOfScheduleAtThisHour = daySchedules.findIndex(s => 
+                getHours(s.start_date) <= i && getHours(s.end_date) >= i
+              )
+              const isScheduleExistAtThisHour = idxOfScheduleAtThisHour > -1
+      
+              if (isScheduleExistAtThisHour) {
+                cells.push(1)
+              } else {
+                cells.push(0)
               }
-            </div>
-          )
-        })
-      }
+            }
+
+            return (
+              <div className="row" style={{
+                borderTop: idx === 0 ? 'solid 1px #ccc': 'none'
+              }} 
+              key={`schedule-item-${item.name}`}>
+                {
+                  cells.map((c, idx) => (
+                    <Fragment key={`cell-${item.name}-${idx}`}>
+                      <div className="col cell time its-flex justify-center">
+                        { c === 1 ? 'X' : 'O'}
+                      </div>
+                      <div className="col cell time its-flex justify-center">
+                        { c === 1 ? 'X' : 'O'}
+                      </div>
+                    </Fragment>
+                  ))
+                }
+              </div>
+            )
+          })
+        }
       </div>
     )
   }
@@ -90,16 +118,7 @@ class Jadwal extends Component {
         <button onClick={ this.goToPrevDay }>Prev</button>
         <button onClick={ this.goToNextDay }>Next</button>
         <div className="its-flex">
-          <div className="legends">
-            <div className="row hours">
-              <div className="legends-title col time its-flex justify-center hour">{ this.props.legendsTitle }</div>
-            </div>
-            { 
-              this.props.items.map(item => (
-                <div className="row">{ item.name }</div>
-              ))
-            }
-          </div>
+          { this.renderLegends() }
           <div className="schedule-container">
             { this.renderHours() }
             { this.renderSchedules() }
