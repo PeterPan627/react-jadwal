@@ -1,7 +1,8 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import isSameDay from 'date-fns/is_same_day'
 import getHours from 'date-fns/get_hours'
 import format from 'date-fns/format'
+import addDays from 'date-fns/add_days';
 
 const items = [{
   "id":656,
@@ -21,6 +22,18 @@ class Jadwal extends Component {
   state = {
     selectedDay: new Date(),
     currentDay: new Date()
+  }
+
+  goToNextDay = () => {
+    this.setState(({ selectedDay }) => ({
+      selectedDay: addDays(selectedDay, 1)
+    }))
+  }
+
+  goToPrevDay = () => {
+    this.setState(({ selectedDay }) => ({
+      selectedDay: addDays(selectedDay, -1)
+    }))
   }
 
   renderHours () {
@@ -71,7 +84,11 @@ class Jadwal extends Component {
             <div className="row" key={`schedule-item-${item.name}`}>
               <div className="col" style={{ flexGrow: 3 }}>{item.name}</div>
               {
-                cells.map(c => <div className="col its-flex justify-center">{ c === 1 ? 'X' : 'O'}</div>)
+                cells.map((c, idx) => (
+                  <div className="col its-flex justify-center" key={`cell-${item.name}-${idx}`}>
+                    { c === 1 ? 'X' : 'O'}
+                  </div>
+                ))
               }
             </div>
           )
@@ -84,7 +101,9 @@ class Jadwal extends Component {
   render() {
     return (
       <div>
-        <h1>Jadwal: { format(this.state.selectedDay, 'dddd d MMMM YYYY') }</h1>
+        <h1>Jadwal: { format(this.state.selectedDay, 'dddd D MMMM YYYY') }</h1>
+        <button onClick={ this.goToPrevDay }>Prev</button>
+        <button onClick={ this.goToNextDay }>Next</button>
         { this.renderHours() }
         { this.renderSchedules() }
       </div>
