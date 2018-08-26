@@ -4,20 +4,6 @@ import getHours from 'date-fns/get_hours'
 import format from 'date-fns/format'
 import addDays from 'date-fns/add_days';
 
-const items = [{
-  "id":656,
-  "name":"APL25-01",
-  "schedules":[
-    {"status_id":205,"start_date":"2018-08-23T07:00:00.000Z","end_date":"2018-08-23T09:00:00.000Z","id":920,"booking_id":813},
-    {"status_id":202,"start_date":"2018-08-24T10:00:00.000Z","end_date":"2018-08-24T12:00:00.000Z","id":1048,"booking_id":910}]
-  },
-  {
-    "id":657,
-    "name":"APL25-02",
-    "schedules":[]
-  }
-]
-
 class Jadwal extends Component {
   state = {
     selectedDay: new Date(),
@@ -46,10 +32,9 @@ class Jadwal extends Component {
     return (
       <div className="jadwal-header">
         <div className="hours row" >
-        <div className="col its-flex justify-center" style={{ flexGrow: 3 }}>Rooms</div>
         {
           hoursRow.map(hour => (
-            <div className="col its-flex justify-center hour" key={`hour-head-${hour}`}>{ hour }</div>
+            <div className="col time its-flex justify-center hour" key={`hour-head-${hour}`}>{ hour }</div>
           ))
         }
         </div>
@@ -60,6 +45,7 @@ class Jadwal extends Component {
 
   renderSchedules () {
     const { selectedDay } = this.state
+    const { items } = this.props
     return (
       <div className="schedules">
       {
@@ -82,10 +68,9 @@ class Jadwal extends Component {
 
           return (
             <div className="row" key={`schedule-item-${item.name}`}>
-              <div className="col" style={{ flexGrow: 3 }}>{item.name}</div>
               {
                 cells.map((c, idx) => (
-                  <div className="col its-flex justify-center" key={`cell-${item.name}-${idx}`}>
+                  <div className="col time its-flex justify-center" key={`cell-${item.name}-${idx}`}>
                     { c === 1 ? 'X' : 'O'}
                   </div>
                 ))
@@ -104,8 +89,22 @@ class Jadwal extends Component {
         <h1>Jadwal: { format(this.state.selectedDay, 'dddd D MMMM YYYY') }</h1>
         <button onClick={ this.goToPrevDay }>Prev</button>
         <button onClick={ this.goToNextDay }>Next</button>
-        { this.renderHours() }
-        { this.renderSchedules() }
+        <div className="its-flex">
+          <div className="legends">
+            <div className="row hours">
+              <div className="legends-title col time its-flex justify-center hour">{ this.props.legendsTitle }</div>
+            </div>
+            { 
+              this.props.items.map(item => (
+                <div className="row">{ item.name }</div>
+              ))
+            }
+          </div>
+          <div className="schedule-container">
+            { this.renderHours() }
+            { this.renderSchedules() }
+          </div>
+        </div>
       </div>
     );
   }

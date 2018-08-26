@@ -46,6 +46,9 @@
   align-items: baseline;
 }
 
+.jadwal-header {
+  width: fit-content;
+}
 .hours .col {
   padding: 16px 0;
 }
@@ -58,4 +61,10 @@
   border: solid 1px #ccc;
   border-top: 0;
   border-bottom: 0;
+}
+.time {
+  width: 100px;
+}
+.schedule-container {
+  overflow: auto;
 }
