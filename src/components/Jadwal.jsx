@@ -3,6 +3,8 @@ import isSameDay from 'date-fns/is_same_day'
 import getHours from 'date-fns/get_hours'
 import format from 'date-fns/format'
 import addDays from 'date-fns/add_days';
+import diffInHours from 'date-fns/difference_in_hours'
+import startOfDay from 'date-fns/start_of_day'
 
 class Jadwal extends Component {
   state = {
@@ -66,24 +68,47 @@ class Jadwal extends Component {
     return (
       <div className="schedules-content">
         <div className="activities">
-          <p>Hahahaha</p>
+          {
+            items.map((item, idx) => {
+              const daySchedules = item.schedules.filter(schedule => 
+                isSameDay(schedule.start_date, selectedDay)
+              ).map(sch => {
+                return ({
+                  ...sch,
+                  distFromStartOfDay: diffInHours(sch.start_date, startOfDay(sch.start_date)),
+                  duration: diffInHours(sch.end_date, sch.start_date)
+                })
+              })
+
+              return (
+                <div className="row activities-group align-items-center">
+                  {
+                    daySchedules.map(dsch => (
+                      <div className="activity"
+                        style={{
+                          left: `${dsch.distFromStartOfDay * 100}px`,
+                          width: `${dsch.duration * 100}px `
+                        }}
+                      >{ dsch.desc }</div>
+                    ))
+                  }
+                </div>
+              )
+            })
+          }
         </div>
         {
           items.map((item, idx) => {
-            const daySchedules = item.schedules.filter(schedule => isSameDay(schedule.start_date, selectedDay))
             const cells = []
-      
-            for (let i = 0; i <= 23; i++) {
-              const idxOfScheduleAtThisHour = daySchedules.findIndex(s => 
-                getHours(s.start_date) <= i && getHours(s.end_date) >= i
-              )
-              const isScheduleExistAtThisHour = idxOfScheduleAtThisHour > -1
-      
-              if (isScheduleExistAtThisHour) {
-                cells.push(1)
-              } else {
-                cells.push(0)
-              }
+
+            for (let i = 0; i < 24; i++) {
+              cells.push(
+              <Fragment>
+                <div className="col cell time its-flex justify-center">
+                </div>
+                <div className="col cell time its-flex justify-center">
+                </div>
+              </Fragment>)
             }
 
             return (
@@ -94,12 +119,7 @@ class Jadwal extends Component {
                 {
                   cells.map((c, idx) => (
                     <Fragment key={`cell-${item.name}-${idx}`}>
-                      <div className="col cell time its-flex justify-center">
-                        { c === 1 ? 'X' : 'O'}
-                      </div>
-                      <div className="col cell time its-flex justify-center">
-                        { c === 1 ? 'X' : 'O'}
-                      </div>
+                      { c }
                     </Fragment>
                   ))
                 }

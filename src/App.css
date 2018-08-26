@@ -80,6 +80,21 @@ html, * {
   width: 100%;
   height: 100%;
 }
+.activities-group {
+  height: 28px;
+}
+.activity {
+  position: absolute;
+  background-color: rgb(128, 197, 246);
+  border-radius: 16px;
+  padding: 4px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .legends {
   width: fit-content;
 }
@@ -100,6 +115,7 @@ html, * {
 
 .cell {
   width: 50px;
+  height: 28px;
   border: solid 1px #ccc;
   border-left: none;
   border-top: none;
