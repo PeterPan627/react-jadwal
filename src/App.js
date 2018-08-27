@@ -8,7 +8,7 @@ const items = [{
   "id":656,
   "name":"APL25-01",
   "schedules":[
-    {"status_id":205,"start_date":"2018-08-23T07:00:00.000Z","end_date":"2018-08-23T09:00:00.000Z","id":920,"booking_id":813, "desc": 'Booking ID - 813'},
+    {"status_id":205,"start_date":"2018-08-23T07:30:00.000Z","end_date":"2018-08-23T09:00:00.000Z","id":920,"booking_id":813, "desc": 'Booking ID - 813'},
     {"status_id":202,"start_date":"2018-08-24T10:00:00.000Z","end_date":"2018-08-24T12:00:00.000Z","id":1048,"booking_id":910, "desc": 'Booking ID - 910'},
     {"status_id":202,"start_date":"2018-08-24T13:00:00.000Z","end_date":"2018-08-24T15:00:00.000Z","id":1048,"booking_id":910, "desc": 'Booking ID - 910'}]
   },

@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import isSameDay from 'date-fns/is_same_day'
 import format from 'date-fns/format'
 import addDays from 'date-fns/add_days'
-import diffInHours from 'date-fns/difference_in_hours'
+import diffInMinutes from 'date-fns/difference_in_minutes'
 import startOfDay from 'date-fns/start_of_day'
 
 class Jadwal extends Component {
@@ -76,23 +76,28 @@ class Jadwal extends Component {
               const daySchedules = item.schedules.filter(schedule => 
                 isSameDay(schedule.start_date, selectedDay)
               ).map(sch => {
+                const minutesDistFromStartOfDay = diffInMinutes(sch.start_date, startOfDay(sch.start_date))
+                const numOfCellsDist = minutesDistFromStartOfDay / 30
+                const durationInMinutes = diffInMinutes(sch.end_date, sch.start_date)
+                const numOfCellsDuration = durationInMinutes / 30
                 return ({
                   ...sch,
-                  distFromStartOfDay: diffInHours(sch.start_date, startOfDay(sch.start_date)),
-                  duration: diffInHours(sch.end_date, sch.start_date)
+                  distFromStartOfDay: numOfCellsDist,
+                  duration: numOfCellsDuration
                 })
               })
-
+              console.log('DS ==>', daySchedules)
               return (
                 <div className="row activities-group align-items-center" key={`activity-${item.name}-${idx}`}>
                   {
                     daySchedules.map((dsch, idx) => (
                       <div className="activity"
                         style={{
-                          left: `${dsch.distFromStartOfDay * 100}px`,
-                          width: `${dsch.duration * 100}px `
+                          left: `${dsch.distFromStartOfDay * 50}px`,
+                          width: `${dsch.duration * 50}px `
                         }}
                         onClick={ () => this.handleClickActivity(dsch) }
+                        key={`activity-item${idx}`}
                       >{ dsch.desc }</div>
                     ))
                   }
