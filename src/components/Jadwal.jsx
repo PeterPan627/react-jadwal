@@ -4,6 +4,7 @@ import format from 'date-fns/format'
 import addDays from 'date-fns/add_days'
 import diffInMinutes from 'date-fns/difference_in_minutes'
 import startOfDay from 'date-fns/start_of_day'
+import { setHours, setMinutes } from 'date-fns';
 
 class Jadwal extends Component {
   state = {
@@ -24,7 +25,20 @@ class Jadwal extends Component {
   }
 
   handleClickActivity = (activity) => {
-    this.props.handleClickActivity(activity)
+    this.props.onActivityClick(activity)
+  }
+
+  handleClickCell = (start, end) => {
+    console.log('handle click activity')
+    let cellStartHour = setHours(this.state.selectedDay, start.hour)
+    cellStartHour = setMinutes(cellStartHour, start.minute)
+    let cellEndHour = setHours(this.state.selectedDay, end.hour)
+    cellEndHour = setMinutes(cellEndHour, end.minute)
+
+    this.props.onCellClick({
+      start: cellStartHour,
+      end: cellEndHour
+    })
   }
 
   renderLegends () {
@@ -112,9 +126,23 @@ class Jadwal extends Component {
             for (let i = 0; i < 24; i++) {
               cells.push(
               <Fragment>
-                <div className="col cell time its-flex justify-center">
+                <div className="col cell time its-flex justify-center" 
+                onClick={() => this.handleClickActivity({
+                  hour: i, 
+                  minute: 0
+                }, {
+                  hour: i, 
+                  minute: 30
+                })}>
                 </div>
-                <div className="col cell time its-flex justify-center">
+                <div className="col cell time its-flex justify-center"
+                onClick={() => this.handleClickActivity({
+                  hour: i, 
+                  minute: 30
+                }, {
+                  hour: i+1, 
+                  minute: 0
+                })}>
                 </div>
               </Fragment>)
             }

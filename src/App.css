@@ -94,6 +94,8 @@ html, * {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  z-index: 99;
+  cursor: pointer;
 }
 .legends {
   width: fit-content;
@@ -120,4 +122,6 @@ html, * {
   border-left: none;
   border-top: none;
   padding: 4px 0;
+  z-index: 9;
+  cursor: pointer;
 }

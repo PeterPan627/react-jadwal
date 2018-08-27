@@ -24,7 +24,8 @@ class App extends Component {
     return (
       <div className="App">
        <Jadwal legendsTitle={'Rooms'} items={items} 
-       handleClickActivity={ (activity) => console.log(activity)}/>
+       onActivityClick={ (activity) => console.log(activity)}
+       onCellClick={ (cellHour) => console.log('cell hour', cellHour)}/>
       </div>
     );
   }
