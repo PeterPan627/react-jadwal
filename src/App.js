@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 import Jadwal from './components/Jadwal'
 
-import './App.css';
-
 const items = [{
   "id":656,
   "name":"APL25-01",

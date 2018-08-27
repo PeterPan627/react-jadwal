@@ -1,17 +1,21 @@
 import React, { Component, Fragment } from 'react'
+
 import isSameDay from 'date-fns/is_same_day'
 import format from 'date-fns/format'
 import addDays from 'date-fns/add_days'
 import diffInMinutes from 'date-fns/difference_in_minutes'
 import startOfDay from 'date-fns/start_of_day'
-import { setHours, setMinutes } from 'date-fns';
+import { setHours, setMinutes } from 'date-fns'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
+import './Jadwal.css'
+
 library.add(faChevronLeft)
 library.add(faChevronRight)
+
 
 class Jadwal extends Component {
   state = {
