@@ -183,9 +183,11 @@ class Jadwal extends Component {
   render() {
     return (
       <div id="jadwal">
-        <h1>Jadwal: { format(this.state.selectedDay, 'dddd D MMMM YYYY') }</h1>
-        <button onClick={ this.goToPrevDay }>Prev</button>
-        <button onClick={ this.goToNextDay }>Next</button>
+        <div className="row align-center justify-center">
+          <button>Prev</button>
+          <p>{ format(this.state.selectedDay, 'dddd, D MMMM YYYY') }</p>
+          <button>Next</button>
+        </div>
         <div className="its-flex">
           { this.renderLegends() }
           <div className="schedule-container">
