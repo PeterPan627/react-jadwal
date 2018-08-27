@@ -86,7 +86,6 @@ class Jadwal extends Component {
                   duration: numOfCellsDuration
                 })
               })
-              console.log('DS ==>', daySchedules)
               return (
                 <div className="row activities-group align-items-center" key={`activity-${item.name}-${idx}`}>
                   {
