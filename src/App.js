@@ -23,7 +23,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-       <Jadwal legendsTitle={'Rooms'} items={items}/>
+       <Jadwal legendsTitle={'Rooms'} items={items} 
+       handleClickActivity={ (activity) => console.log(activity)}/>
       </div>
     );
   }

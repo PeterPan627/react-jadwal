@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import isSameDay from 'date-fns/is_same_day'
 import format from 'date-fns/format'
-import addDays from 'date-fns/add_days';
+import addDays from 'date-fns/add_days'
 import diffInHours from 'date-fns/difference_in_hours'
 import startOfDay from 'date-fns/start_of_day'
 
@@ -21,6 +21,10 @@ class Jadwal extends Component {
     this.setState(({ selectedDay }) => ({
       selectedDay: addDays(selectedDay, -1)
     }))
+  }
+
+  handleClickActivity = (activity) => {
+    this.props.handleClickActivity(activity)
   }
 
   renderLegends () {
@@ -88,6 +92,7 @@ class Jadwal extends Component {
                           left: `${dsch.distFromStartOfDay * 100}px`,
                           width: `${dsch.duration * 100}px `
                         }}
+                        onClick={ () => this.handleClickActivity(dsch) }
                       >{ dsch.desc }</div>
                     ))
                   }
