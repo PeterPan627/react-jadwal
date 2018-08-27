@@ -193,7 +193,7 @@ class Jadwal extends Component {
           <button onClick={ this.goToPrevDay } className="j-btn">
             <FontAwesomeIcon icon="chevron-left" />
           </button>
-          <p>{ format(this.state.selectedDay, 'dddd, D MMMM YYYY') }</p>
+          <p className="selected-day">{ format(this.state.selectedDay, 'dddd, D MMMM YYYY') }</p>
           <button onClick={ this.goToNextDay } className="j-btn">
             <FontAwesomeIcon icon="chevron-right" />
           </button>

@@ -5,6 +5,10 @@
 #jadwal * {
   box-sizing: border-box !important;
 }
+.selected-day {
+  margin-left: 16px;
+  margin-right: 16px;
+}
 .j-btn {
   background-color: #1890ff;
   color: #fff;
