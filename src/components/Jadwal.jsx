@@ -6,6 +6,13 @@ import diffInMinutes from 'date-fns/difference_in_minutes'
 import startOfDay from 'date-fns/start_of_day'
 import { setHours, setMinutes } from 'date-fns';
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faChevronLeft)
+library.add(faChevronRight)
+
 class Jadwal extends Component {
   state = {
     selectedDay: new Date(),
@@ -29,7 +36,6 @@ class Jadwal extends Component {
   }
 
   handleClickCell = (start, end) => {
-    console.log('handle click activity')
     let cellStartHour = setHours(this.state.selectedDay, start.hour)
     cellStartHour = setMinutes(cellStartHour, start.minute)
     let cellEndHour = setHours(this.state.selectedDay, end.hour)
@@ -44,14 +50,14 @@ class Jadwal extends Component {
   renderLegends () {
     return (
       <div className="legends">
-        <div className="row legends-title">
-          <div className="col its-flex justify-center">
+        <div className="j-row legends-title">
+          <div className="j-col its-flex justify-center">
           { this.props.legendsTitle }
           </div>
         </div>
         { 
           this.props.items.map((item, idx) => (
-            <div className="row item" key={`legend-item-${idx}`}>
+            <div className="j-row item" key={`legend-item-${idx}`}>
               { item.name }
             </div>
           ))
@@ -80,10 +86,10 @@ class Jadwal extends Component {
     }
     return (
       <div className="schedules-header">
-        <div className="hours row" >
+        <div className="hours j-row" >
         {
           hoursRow.map(hour => (
-            <div className="col time its-flex justify-center hour" key={`hour-head-${hour}`}>{ hour }</div>
+            <div className="j-col time its-flex justify-center hour" key={`hour-head-${hour}`}>{ hour }</div>
           ))
         }
         </div>
@@ -114,7 +120,7 @@ class Jadwal extends Component {
                 })
               })
               return (
-                <div className="row activities-group align-items-center" key={`activity-${item.name}-${idx}`}>
+                <div className="j-row activities-group align-items-center" key={`activity-${item.name}-${idx}`}>
                   {
                     daySchedules.map((dsch, idx) => (
                       <div className="activity"
@@ -139,7 +145,7 @@ class Jadwal extends Component {
             for (let i = 0; i < 24; i++) {
               cells.push(
               <Fragment>
-                <div className="col cell time its-flex justify-center" 
+                <div className="j-col cell time its-flex justify-center" 
                 onClick={() => this.handleClickActivity({
                   hour: i, 
                   minute: 0
@@ -148,7 +154,7 @@ class Jadwal extends Component {
                   minute: 30
                 })}>
                 </div>
-                <div className="col cell time its-flex justify-center"
+                <div className="j-col cell time its-flex justify-center"
                 onClick={() => this.handleClickActivity({
                   hour: i, 
                   minute: 30
@@ -161,7 +167,7 @@ class Jadwal extends Component {
             }
 
             return (
-              <div className="row" style={{
+              <div className="j-row" style={{
                 borderTop: idx === 0 ? 'solid 1px #ccc': 'none'
               }} 
               key={`schedule-item-${item.name}`}>
@@ -183,10 +189,14 @@ class Jadwal extends Component {
   render() {
     return (
       <div id="jadwal">
-        <div className="row align-center justify-center">
-          <button>Prev</button>
+        <div className="j-row align-center justify-center">
+          <button onClick={ this.goToPrevDay } className="j-btn">
+            <FontAwesomeIcon icon="chevron-left" />
+          </button>
           <p>{ format(this.state.selectedDay, 'dddd, D MMMM YYYY') }</p>
-          <button>Next</button>
+          <button onClick={ this.goToNextDay } className="j-btn">
+            <FontAwesomeIcon icon="chevron-right" />
+          </button>
         </div>
         <div className="its-flex">
           { this.renderLegends() }

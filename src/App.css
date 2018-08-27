@@ -5,12 +5,20 @@
 #jadwal * {
   box-sizing: border-box !important;
 }
+.j-btn {
+  background-color: #1890ff;
+  color: #fff;
+  border: solid 1px #ccc;
+  padding: 4px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
 /* utils */
-.row,
+.j-row,
 .its-flex {
   display: flex;
 }
-.col {
+.j-col {
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
@@ -53,7 +61,7 @@
 .schedules-header, .schedules-content {
   width: fit-content;
 }
-.hours .col {
+.hours .j-col {
   padding: 8px 0;
 }
 
@@ -73,7 +81,7 @@
 .schedules-content {
   position: relative;
 }
-.schedules-content>.row{
+.schedules-content>.j-row{
   border-top: solid 1px #ccc;
 }
 .activities {
@@ -105,7 +113,7 @@
 .legends-title {
   border: solid 1px #ccc;
 }
-.legends-title .col {
+.legends-title .j-col {
   padding: 8px 0;
 }
 .legends .item{
