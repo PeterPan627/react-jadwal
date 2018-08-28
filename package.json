@@ -6,6 +6,11 @@
   "repository": "https://github.com/tamatamvan/react-jadwal.git",
   "author": "Septian A Tama <septian.a.tama@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "transpile": "babel src -d dist --copy-files",
+    "prepublishOnly": "npm run transpile",
+    "build": "webpack --mode production"
+  },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.2",
     "@fortawesome/free-solid-svg-icons": "^5.2.0",
@@ -15,10 +20,12 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^1.0.0",
     "html-webpack-plugin": "^3.2.0",
     "style-loader": "^0.23.0",
