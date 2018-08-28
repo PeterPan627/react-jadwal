@@ -1,8 +1,8 @@
 {
   "name": "react-jadwal",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A simple daily schedule timeline component",
-  "main": "dist/bundle.js",
+  "main": "dist/components/Jadwal.js",
   "repository": "https://github.com/tamatamvan/react-jadwal.git",
   "author": "Septian A Tama <septian.a.tama@gmail.com>",
   "license": "MIT",
