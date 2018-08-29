@@ -26,13 +26,13 @@ class Jadwal extends Component {
   goToNextDay = () => {
     this.setState(({ selectedDay }) => ({
       selectedDay: addDays(selectedDay, 1)
-    }))
+    }), () => this.props.handleDateChange(this.state.selectedDay)) 
   }
 
   goToPrevDay = () => {
     this.setState(({ selectedDay }) => ({
       selectedDay: addDays(selectedDay, -1)
-    }))
+    }), () => this.props.handleDateChange(this.state.selectedDay))
   }
 
   handleClickActivity = (activity) => {
