@@ -144,7 +144,7 @@ class Jadwal extends Component {
               cells.push(
               <Fragment>
                 <div className="j-col cell time its-flex justify-center" 
-                onClick={() => this.handleClickActivity({
+                onClick={() => this.handleClickCell({
                   hour: i, 
                   minute: 0
                 }, {
@@ -153,7 +153,7 @@ class Jadwal extends Component {
                 })}>
                 </div>
                 <div className="j-col cell time its-flex justify-center"
-                onClick={() => this.handleClickActivity({
+                onClick={() => this.handleClickCell({
                   hour: i, 
                   minute: 30
                 }, {
