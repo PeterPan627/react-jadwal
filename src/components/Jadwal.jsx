@@ -39,7 +39,7 @@ class Jadwal extends Component {
     this.props.onActivityClick(activity)
   }
 
-  handleClickCell = (start, end) => {
+  handleClickCell = (start, end, item) => {
     let cellStartHour = setHours(this.state.selectedDay, start.hour)
     cellStartHour = setMinutes(cellStartHour, start.minute)
     let cellEndHour = setHours(this.state.selectedDay, end.hour)
@@ -47,7 +47,8 @@ class Jadwal extends Component {
 
     this.props.onCellClick({
       start: cellStartHour,
-      end: cellEndHour
+      end: cellEndHour,
+      item
     })
   }
 
@@ -150,7 +151,7 @@ class Jadwal extends Component {
                 }, {
                   hour: i, 
                   minute: 30
-                })}>
+                }, item)}>
                 </div>
                 <div className="j-col cell time its-flex justify-center"
                 onClick={() => this.handleClickCell({
