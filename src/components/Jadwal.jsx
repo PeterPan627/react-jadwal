@@ -26,13 +26,13 @@ class Jadwal extends Component {
   goToNextDay = () => {
     this.setState(({ selectedDay }) => ({
       selectedDay: addDays(selectedDay, 1)
-    }), () => this.props.handleDateChange(this.state.selectedDay)) 
+    }), () => this.props.onDateChange(this.state.selectedDay)) 
   }
 
   goToPrevDay = () => {
     this.setState(({ selectedDay }) => ({
       selectedDay: addDays(selectedDay, -1)
-    }), () => this.props.handleDateChange(this.state.selectedDay))
+    }), () => this.props.onDateChange(this.state.selectedDay))
   }
 
   handleClickActivity = (activity) => {
@@ -75,15 +75,9 @@ class Jadwal extends Component {
     const hoursRow = []
     const hourCell = (num) => {
       if (num > 12) {
-        return `${num-12}pm-${num-11}pm`
+        return `${num-12}pm`
       }
-      if(num === 11) {
-        return `11am-12pm`
-      }
-      if(num === 12) {
-        return `12pm-1pm`
-      }
-      return `${num}am-${num+1}am`
+      return `${num}am`
     }
     for (let i = 0; i <= 23; i++) {
       hoursRow.push(hourCell(i))
