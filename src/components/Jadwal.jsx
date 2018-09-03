@@ -159,7 +159,7 @@ class Jadwal extends Component {
                   minute: 30
                 }, item)}>
                 </div>
-                <div id={`cell-${item.id}-${i}`} className="j-col cell time its-flex justify-center"
+                <div id={`cell-${item.id}-${i}-30`} className="j-col cell time its-flex justify-center"
                 onClick={() => this.handleClickCell({
                   hour: i, 
                   minute: 30

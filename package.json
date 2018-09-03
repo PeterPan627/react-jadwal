@@ -1,6 +1,6 @@
 {
   "name": "react-jadwal",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "A simple daily schedule timeline component",
   "main": "dist/components/Jadwal.js",
   "repository": "https://github.com/tamatamvan/react-jadwal.git",
