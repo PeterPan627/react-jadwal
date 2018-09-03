@@ -76,9 +76,15 @@ class Jadwal extends Component {
     const hoursRow = []
     const hourCell = (num) => {
       if (num > 12) {
-        return `${num-12}pm`
+        return `${num-12}pm-${num-11}pm`
       }
-      return `${num}am`
+      if(num === 11) {
+        return `11am-12pm`
+      }
+      if(num === 12) {
+        return `12pm-1pm`
+      }
+      return `${num}am-${num+1}am`
     }
     for (let i = 0; i <= 23; i++) {
       hoursRow.push(hourCell(i))
