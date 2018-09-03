@@ -125,10 +125,10 @@ class Jadwal extends Component {
                 })
               })
               return (
-                <div className="j-row activities-group align-items-center" key={`activity-${item.name}-${idx}`}>
+                <div id={`ag-${idx}`} className="j-row activities-group align-items-center" key={`activity-${item.name}-${idx}`}>
                   {
                     daySchedules.map((dsch, idx) => (
-                      <div className="activity"
+                      <div id={`activity-itm-${idx}`} className="activity"
                         style={{
                           left: `${dsch.distFromStartOfDay * 50}px`,
                           width: `${dsch.duration * 50}px `
@@ -150,7 +150,7 @@ class Jadwal extends Component {
             for (let i = 0; i < 24; i++) {
               cells.push(
               <Fragment>
-                <div className="j-col cell time its-flex justify-center" 
+                <div id={`cell-${item.id}-${i}`} className="j-col cell time its-flex justify-center" 
                 onClick={() => this.handleClickCell({
                   hour: i, 
                   minute: 0
@@ -159,20 +159,20 @@ class Jadwal extends Component {
                   minute: 30
                 }, item)}>
                 </div>
-                <div className="j-col cell time its-flex justify-center"
+                <div id={`cell-${item.id}-${i}`} className="j-col cell time its-flex justify-center"
                 onClick={() => this.handleClickCell({
                   hour: i, 
                   minute: 30
                 }, {
                   hour: i+1, 
                   minute: 0
-                })}>
+                }, item)}>
                 </div>
               </Fragment>)
             }
 
             return (
-              <div className="j-row" style={{
+              <div id={`cells-row-${idx}`} className="j-row" style={{
                 borderTop: idx === 0 ? 'solid 1px #ccc': 'none'
               }} 
               key={`schedule-item-${item.name}`}>
@@ -195,11 +195,11 @@ class Jadwal extends Component {
     return (
       <div id="jadwal">
         <div className="j-row align-center justify-center">
-          <button onClick={ this.goToPrevDay } className="j-btn">
+          <button onClick={ this.goToPrevDay } className="j-btn prev">
             <FontAwesomeIcon icon="chevron-left" />
           </button>
           <p className="selected-day">{ format(this.state.selectedDay, 'dddd, D MMMM YYYY') }</p>
-          <button onClick={ this.goToNextDay } className="j-btn">
+          <button onClick={ this.goToNextDay } className="j-btn next">
             <FontAwesomeIcon icon="chevron-right" />
           </button>
         </div>
