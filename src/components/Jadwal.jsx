@@ -5,7 +5,8 @@ import format from 'date-fns/format'
 import addDays from 'date-fns/add_days'
 import diffInMinutes from 'date-fns/difference_in_minutes'
 import startOfDay from 'date-fns/start_of_day'
-import { setHours, setMinutes } from 'date-fns'
+import setHours from 'date-fns/set_hours'
+import setMinutes from 'date-fns/set_minutes
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
